@@ -1,4 +1,5 @@
 {
+  "extends": "./base-ts-config.json",
   "compilerOptions": {
     "target": "es5",
     "lib": [
