@@ -1,14 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Input, Space } from "antd";
+import dayjs from "dayjs";
 
 function Lesson1() {
   const [counter, setCounter] = useState(0);
-  const [timer, setTimer] = useState(new Date());
+  const [timer, setTimer] = useState(dayjs());
   useEffect(() => {
-    setTimeout(() => {
-      setTimer(new Date());
+    setInterval(() => {
+      setTimer(dayjs());
     }, 1000);
   }, []);
+
+  const todos = useMemo(() => {
+    console.log("进行了计算");
+    return counter;
+  }, [counter]);
   return (
     <Space
       style={{
@@ -17,15 +23,17 @@ function Lesson1() {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+        flexDirection: "column",
       }}
     >
-      <h2>{timer.valueOf()}</h2>
+      <h2>{dayjs(timer).format("YYYY-MM-DDTHH:mm:ss")}</h2>
       <Space style={{ marginTop: 12 }}>
         <Input
           value={counter}
           onChange={(e) => setCounter(Number(e.target.value))}
         />
       </Space>
+      <Space>输入框value：{todos}</Space>
     </Space>
   );
 }
