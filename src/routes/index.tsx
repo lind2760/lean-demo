@@ -9,6 +9,7 @@ import ErrorBoundary from "@/component/ErrorBoundary";
 
 // 需要懒加载的页面组件
 const HomePage = lazy(() => import("@/pages/Home"));
+const Lesson1 = lazy(() => import("@/pages/Lesson1"));
 
 /**
  * @param Component 懒加载的组件
@@ -45,7 +46,7 @@ export const getUserInfo = (): Promise<UserInfo> => {
       resolve({
         name: "jianjian",
         age: 12,
-        permissionRoutes: ["home", "list"],
+        permissionRoutes: ["home"],
         code: 200,
       });
     }, 1000);
@@ -61,8 +62,8 @@ const rootLoader = async () => {
   console.log("页面加载前请求用户信息");
   // 这里用假的接口模拟下
   const { permissionRoutes, name, age, code } = await getUserInfo();
-  // 假设20001代表登陆过期
-  if (code === 20001) {
+  // 假设20000代表登陆过期
+  if (code === 20000) {
     redirect("/login");
   }
   return {
@@ -88,6 +89,17 @@ const routerConfig: RouteObject[] = [
         index: true,
         path: "/home/rcForm",
         element: LazyLoad(HomePage, 200),
+      },
+    ],
+  },
+  {
+    path: "/lesson",
+    errorElement: <ErrorBoundary />,
+    children: [
+      {
+        index: true,
+        path: "/lesson/1",
+        element: LazyLoad(Lesson1),
       },
     ],
   },
