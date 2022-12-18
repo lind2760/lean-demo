@@ -1,7 +1,7 @@
 /*eslint-disable*/
 import { useRef, useState } from "react";
 import { Store } from "@/component/RCForm/Form";
-import Schema from "@/component/RCForm/asyncValidator";
+import Schema, { ErrorFieldsEntity } from "@/component/RCForm/asyncValidator";
 
 class FormStore {
   private store;
@@ -35,6 +35,8 @@ class FormStore {
 
   setFieldValue = (name: string, value: Store) => {
     this.store[name] = value;
+    console.log("name===================》", name);
+    console.log("value===================》", value);
     const currentFieldEntity = this.fieldEntities.find(
       (item) => item.name === name
     );
@@ -57,8 +59,8 @@ class FormStore {
   };
 
   setCallbacks = (callbacks: {
-    onFinish: (store: any) => void;
-    onFinishFailed: (store: any) => void;
+    onFinish: (values: Store) => void;
+    onFinishFailed: (error: ErrorFieldsEntity) => void;
   }) => {
     this.callbacks = callbacks;
   };
@@ -110,6 +112,9 @@ class FormStore {
     );
   };
 
+  /**
+   * 提供实体函数
+   */
   getForm = () => {
     return {
       setFieldsValue: this.setFieldsValue,

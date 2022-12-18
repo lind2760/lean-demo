@@ -14,7 +14,6 @@ function HomePage() {
         initialValue={{
           userName: "张三 ",
           password: 123456,
-          test: "123",
         }}
         onFinish={(values) => {
           console.log(values);

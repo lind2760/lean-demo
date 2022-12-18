@@ -1,5 +1,6 @@
 import React, { CSSProperties, ReactNode, useRef } from "react";
 import useForm from "@/component/RCForm/useForm";
+import { ErrorFieldsEntity } from "@/component/RCForm/asyncValidator";
 import FieldContext from "./FieldContext";
 
 export type Store = Record<any, any>;
@@ -10,7 +11,7 @@ function Form<T extends Store>(props: {
   onFinish?: (values: T) => void;
   children: ReactNode;
   // eslint-disable-next-line no-unused-vars
-  onFinishFailed?: (error: any) => void;
+  onFinishFailed?: (error: ErrorFieldsEntity) => void;
   style?: CSSProperties;
 }) {
   const { initialValue, onFinish, children, onFinishFailed, style } = props;

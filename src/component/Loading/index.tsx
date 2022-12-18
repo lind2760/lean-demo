@@ -1,7 +1,8 @@
 import React from "react";
+import { Spin } from "antd";
 
 function Loading() {
-  return <div>456</div>;
+  return <Spin tip="正在加载中" />;
 }
 
 export default Loading;

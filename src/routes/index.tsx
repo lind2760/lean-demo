@@ -10,6 +10,7 @@ import ErrorBoundary from "@/component/ErrorBoundary";
 // 需要懒加载的页面组件
 const HomePage = lazy(() => import("@/pages/Home"));
 const Lesson1 = lazy(() => import("@/pages/Lesson1"));
+const Lesson2 = lazy(() => import("@/pages/Lesson2"));
 
 /**
  * @param Component 懒加载的组件
@@ -46,7 +47,7 @@ export const getUserInfo = (): Promise<UserInfo> => {
       resolve({
         name: "jianjian",
         age: 12,
-        permissionRoutes: ["home"],
+        permissionRoutes: ["lesson"],
         code: 200,
       });
     }, 1000);
@@ -95,11 +96,17 @@ const routerConfig: RouteObject[] = [
   {
     path: "/lesson",
     errorElement: <ErrorBoundary />,
+    id: "lesson",
+    loader: rootLoader,
     children: [
       {
         index: true,
         path: "/lesson/1",
         element: LazyLoad(Lesson1),
+      },
+      {
+        path: "/lesson/2",
+        element: LazyLoad(Lesson2),
       },
     ],
   },

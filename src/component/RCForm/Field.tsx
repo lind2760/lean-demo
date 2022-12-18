@@ -1,5 +1,6 @@
 import React, {
   cloneElement,
+  HTMLAttributes,
   useContext,
   useEffect,
   useRef,
@@ -18,7 +19,7 @@ const cx = classNames.bind(styles);
  * 输入框值改变时同步formInstance
  */
 function Field(props: {
-  children?: any;
+  children: React.ReactElement;
   name?: string;
   label?: string;
   rules?: Record<any, any>[];
@@ -28,9 +29,12 @@ function Field(props: {
   const { children, name, label, rules } = props;
   const mountRef = useRef(false);
   const [, setRefreshCode] = useState(0);
+
+  // 注册字段store value改变后刷新state让表单项重渲染
   const onStoreChange = () => {
     setRefreshCode((prevState) => prevState + 1);
   };
+  // 当表单项首次挂载后注册该表单实例
   useEffect(() => {
     if (!mountRef.current) {
       mountRef.current = true;
@@ -38,7 +42,8 @@ function Field(props: {
     }
   }, [name, registerField, rules]);
 
-  const getController = (childProps: any) => {
+  // 获取表单控制项，继承初始元素所有属性对象，同时同步默认value与onChange事件
+  const getController = (childProps: HTMLAttributes<any>) => {
     return {
       ...childProps,
       // value跟onChange是react属性-会自身同步到原生dom上
@@ -50,13 +55,13 @@ function Field(props: {
   return (
     <div className={cx("rc_form_item")}>
       <span>{label}:</span>
+      {/* 克隆新元素并追加控制项 */}
       <span>{cloneElement(children, getController(children.props))}</span>
     </div>
   );
 }
 
 Field.defaultProps = {
-  children: undefined,
   name: undefined,
   label: undefined,
   rules: [],

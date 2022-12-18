@@ -10,7 +10,8 @@ interface Iprops {
 // eslint-disable-next-line react/function-component-definition
 const Permission: FC<PropsWithChildren<Iprops>> = (props) => {
   // 这个root是我们在前面路由中定义了 id: 'root'
-  // const loaderData = useRouteLoaderData("root");
+  // const loaderData = useRouteLoaderData("lesson");
+  // console.log("loaderData=================>", loaderData);
   const { children, code } = props;
   // if (code || loaderData?.permissionRoutes?.includes(code)) {
   if (code) {
