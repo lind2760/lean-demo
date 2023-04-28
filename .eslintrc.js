@@ -42,4 +42,7 @@ module.exports = {
     // @ant-design/icons缺少依赖项
     "import/core-modules": ["@ant-design/icons"],
   },
+  globals: {
+    NodeJs: true,
+  },
 };

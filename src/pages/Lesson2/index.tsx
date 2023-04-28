@@ -26,7 +26,12 @@ function Lesson2() {
           刷新
         </Button>
       </Space>
-      <Category syncFunc={setCategoryInfo} />
+      <Category
+        syncFunc={setCategoryInfo}
+        /*        syncFunc={(data) => {
+                          setCategoryInfo(data);
+                        }} */
+      />
       <section>
         <Space>展示区域</Space>
         <Space

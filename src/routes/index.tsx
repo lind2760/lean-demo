@@ -11,6 +11,8 @@ import ErrorBoundary from "@/component/ErrorBoundary";
 const HomePage = lazy(() => import("@/pages/Home"));
 const Lesson1 = lazy(() => import("@/pages/Lesson1"));
 const Lesson2 = lazy(() => import("@/pages/Lesson2"));
+const Lesson3 = lazy(() => import("@/pages/Lesson3"));
+const Lesson4 = lazy(() => import("@/pages/Lesson4"));
 
 /**
  * @param Component 懒加载的组件
@@ -107,6 +109,14 @@ const routerConfig: RouteObject[] = [
       {
         path: "/lesson/2",
         element: LazyLoad(Lesson2),
+      },
+      {
+        path: "/lesson/3",
+        element: LazyLoad(Lesson3),
+      },
+      {
+        path: "/lesson/4",
+        element: LazyLoad(Lesson4),
       },
     ],
   },

@@ -35,8 +35,6 @@ class FormStore {
 
   setFieldValue = (name: string, value: Store) => {
     this.store[name] = value;
-    console.log("name===================》", name);
-    console.log("value===================》", value);
     const currentFieldEntity = this.fieldEntities.find(
       (item) => item.name === name
     );
